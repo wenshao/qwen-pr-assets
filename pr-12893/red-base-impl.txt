@@ -1,0 +1,85 @@
+
+ RUN  v3.2.7 /root/git/qwen-code/.qwen/worktrees/pr-12893/packages/core
+      Coverage enabled with v8
+
+ ❯ src/memory/search-memory.test.ts (49 tests | 1 failed | 48 skipped) 35ms
+   ↓ executeSearchMemory > reports privacy-safe execution timing and result counts
+   ↓ executeSearchMemory > fetches exact refs without leaking metadata
+   ↓ executeSearchMemory > rescans uncapped so a recall-visible ref beyond the file cap resolves
+   ↓ executeSearchMemory > uses a lossless encoded ref for paths with prompt punctuation
+   ↓ executeSearchMemory > caps all bodies in one fetch call
+   ↓ executeSearchMemory > does not repeat a body that is still present in history
+   ↓ executeSearchMemory > reports an exhausted but resident body as already available
+   ↓ executeSearchMemory > reads a new version even when the previous body is still present
+   ↓ executeSearchMemory > lets cursor continuation reach the end of a memory body
+   ↓ executeSearchMemory > fetches the remaining body from a search cursor without restarting
+   ↓ executeSearchMemory > does not mark a cursor tail as a complete resident body after earlier coverage is evicted
+   ↓ executeSearchMemory > returns a new body window when a later search targets the same ref
+   ↓ executeSearchMemory > does not repeat a fully resident body through search
+   ↓ executeSearchMemory > does not repeat an unchanged search window already in history
+   ↓ executeSearchMemory > returns a search window for a match after the aggregate result budget
+   × executeSearchMemory > preserves the exhausted signal when replaying an already covered window 31ms
+     → expected undefined to be true // Object.is equality
+   ↓ executeSearchMemory > does not exhaust a ref after a short window near the read cap
+   ↓ executeSearchMemory > does not return an empty result for a body match beyond the read budget
+   ↓ executeSearchMemory > does not let fetch restart an exhausted ref without a cursor
+   ↓ executeSearchMemory > rejects fabricated memory cursors
+   ↓ executeSearchMemory > rejects edited issued memory cursors
+   ↓ executeSearchMemory > reports missing refs without guessing replacements
+   ↓ executeSearchMemory > reports a ref that disappears after the snapshot
+   ↓ executeSearchMemory > stops when cancelled while rereading a selected document
+   ↓ executeSearchMemory > accepts Unicode letter keywords used by recall metadata
+   ↓ executeSearchMemory > does not match stored keyword "api" by substring
+   ↓ executeSearchMemory > does not match stored keyword "kubernetes pod restart policy" by substring
+   ↓ executeSearchMemory > includes team memory in a trusted default scan
+   ↓ executeSearchMemory > deduplicates requested scopes before filtering a snapshot
+   ↓ executeSearchMemory > suggests a unique full ref without silently reading it
+   ↓ executeSearchMemory > does not mix body-only matches into qualified metadata results
+   ↓ executeSearchMemory > ranks by weighted match quality across multiple keywords
+   ↓ executeSearchMemory > keeps context before the first body match
+   ↓ executeSearchMemory > starts the body window on the exact word-boundary character
+   ↓ executeSearchMemory > maps normalized match offsets back to the original body
+   ↓ executeSearchMemory > maps both window edges back to the original body
+   ↓ executeSearchMemory > uses a bounded diversity bonus to cover an otherwise uncovered keyword
+   ↓ executeSearchMemory > anchors the body window at the region covering the most keywords
+   ↓ executeSearchMemory > ignores invalid or excess search keywords when at least one keyword remains valid
+   ↓ executeSearchMemory > still rejects search when all keywords are invalid
+   ↓ executeSearchMemory > does not distribute a multi-keyword body fallback across weak memories
+   ↓ executeSearchMemory > keeps a strong body fallback despite one incidental metadata hit
+   ↓ executeSearchMemory > drops single generic metadata hits when a strong phrase target exists
+   ↓ executeSearchMemory > matches a domain-qualified keyword phrase as one exact anchor
+   ↓ executeSearchMemory > rejects out-of-range search limits
+   ↓ executeSearchMemory > explores category branches without returning body content
+   ↓ executeSearchMemory > rejects cursors used for a different ref or branch
+   ↓ executeSearchMemory > orders search ties by project, user, team, then relative path
+   ↓ executeSearchMemory > returns router data for root explore
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/memory/search-memory.test.ts > executeSearchMemory > preserves the exhausted signal when replaying an already covered window
+AssertionError: expected undefined to be true // Object.is equality
+
+[32m- Expected:[39m 
+true
+
+[31m+ Received:[39m 
+undefined
+
+ ❯ src/memory/search-memory.test.ts:618:42
+    616|     expect(replayed).not.toHaveProperty('content');
+    617|     expect(replayed?.nextCursor).toBeUndefined();
+    618|     expect(replayed?.readLimitExhausted).toBe(true);
+       |                                          ^
+    619|     expect(replayed?.readLimitMessage).toContain(
+    620|       'per-ref fetch budget is exhausted',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 48 skipped (49)
+   Start at  13:03:49
+   Duration  16.04s (transform 559ms, setup 48ms, collect 692ms, tests 35ms, environment 0ms, prepare 134ms)
+
+JUNIT report written to /root/git/qwen-code/.qwen/worktrees/pr-12893/packages/core/junit.xml
+EXIT=1
