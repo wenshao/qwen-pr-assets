@@ -1,0 +1,253 @@
+
+ RUN  v3.2.7 /root/git/qwen-code/.qwen/worktrees/pr-12893/packages/core
+      Coverage enabled with v8
+
+ ❯ src/memory/store.test.ts (17 tests | 7 failed) 131ms
+   ✓ auto-memory storage scaffold > builds stable auto-memory paths under project .qwen directory 19ms
+   × auto-memory storage scaffold > uses the runtime output directory for managed auto-memory 36ms
+     → expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-dVxMCv/runtime-outpu…' // Object.is equality
+   × auto-memory storage scaffold > shares managed auto-memory across nested directories in the same git checkout by default 15ms
+     → expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-KKQ3Ko/runtime-outpu…' // Object.is equality
+   × auto-memory storage scaffold > isolates managed auto-memory by exact workspace when workspace scope is enabled 4ms
+     → expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-WYBGOA/runtime-outpu…' // Object.is equality
+   × auto-memory storage scaffold > normalizes the memory project scope value case-insensitively 8ms
+     → expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-uX8cqL/runtime-outpu…' // Object.is equality
+   × auto-memory storage scaffold > falls back to git-root scope and warns once on an unrecognized scope value 7ms
+     → expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-muGj3K/runtime-outpu…' // Object.is equality
+   × auto-memory storage scaffold > gives a linked git worktree its own memory root, separate from the main checkout 6ms
+     → expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-yb86OW/runtime-outpu…' // Object.is equality
+   ✓ auto-memory storage scaffold > uses QWEN_RUNTIME_DIR for managed auto-memory 1ms
+   × auto-memory storage scaffold > does not reuse cached roots across runtime output dirs 6ms
+     → expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-Kd8gfA/runtime-a/pro…' // Object.is equality
+   ✓ auto-memory storage scaffold > keeps QWEN_CODE_MEMORY_BASE_DIR ahead of the runtime output directory 2ms
+   ✓ auto-memory storage scaffold > resolves QWEN_CODE_MEMORY_BASE_DIR before using it 1ms
+   ✓ auto-memory storage scaffold > creates a complete managed auto-memory scaffold 8ms
+   ✓ auto-memory storage scaffold > is idempotent and preserves existing index content 3ms
+   ✓ auto-memory storage scaffold > returns null when the auto-memory index does not exist yet 1ms
+   ✓ auto-memory storage scaffold > reads the managed auto-memory index after scaffold creation 3ms
+   ✓ auto-memory storage scaffold > returns content and stats for an existing auto-memory index 4ms
+   ✓ auto-memory storage scaffold > returns null when reading auto-memory index with stats before creation 1ms
+ ✓ src/memory/channel-memory.test.ts (52 tests) 1574ms
+   ✓ channel memory > rejects additions beyond request, entry, and text limits  736ms
+ ✓ src/memory/structured-scan.test.ts (41 tests) 1097ms
+ ✓ src/memory/forget.test.ts (24 tests) 512ms
+ ✓ src/memory/memoryDiscovery.test.ts (52 tests) 713ms
+ ✓ src/memory/recall-delivery-eval.test.ts (7 tests) 1624ms
+   ✓ auto-memory recall delivery evaluation > keeps deterministic candidate selection far inside the initial budget  705ms
+   ✓ auto-memory recall delivery evaluation > reports the before/after delivery table  738ms
+ ✓ src/memory/team-memory-sync.test.ts (14 tests) 5125ms
+   ✓ syncTeamMemory > commits local team memory and pushes it to the remote  458ms
+   ✓ syncTeamMemory > commits without running the repository gpg program  376ms
+   ✓ syncTeamMemory > attributes the commit to opts.author when provided  444ms
+   ✓ syncTeamMemory > fast-forward-pulls team memory another collaborator pushed  503ms
+   ✓ syncTeamMemory > reconciles a second writer instead of diverging (commit lands on top)  562ms
+   ✓ syncTeamMemory > reports pull-failed (not silent) when the branch has truly diverged  497ms
+   ✓ syncTeamMemory > does not push commits the sync did not create (branch already ahead)  352ms
+   ✓ syncTeamMemory > rolls back its own commit when the push is rejected  807ms
+   ✓ syncTeamMemory > does not rewind over a concurrent commit when the push is rejected  459ms
+ ❯ src/memory/recall-scan-latency.test.ts (1 test | 1 failed) 3627ms
+   × auto-memory recall scan latency > publishes the fast result well inside the initial budget 3084ms
+     → expected 83.07488300000023 to be less than 50
+ ❯ src/memory/dreamAgentPlanner.test.ts (10 tests | 1 failed) 257ms
+   × dreamAgentPlanner > returns project-scoped session transcript directory 47ms
+     → expected '/root/.qwen/projects/-tmp-auto-memory…' to contain '/tmp/auto-memory-dream-agent-Ri7YKg/r…'
+   ✓ dreamAgentPlanner > shell-quotes the transcript directory in the grep example 10ms
+   ✓ dreamAgentPlanner > excludes pinned memories from consolidation 11ms
+   ✓ dreamAgentPlanner > returns the forked agent result 13ms
+   ✓ dreamAgentPlanner > threads the configured memory agent timeout into the forked agent 7ms
+   ✓ dreamAgentPlanner > threads the configured memory agent turn limit into the forked agent 15ms
+   ✓ dreamAgentPlanner > preserves the zero turn limit sentinel 10ms
+   ✓ dreamAgentPlanner > can read transcripts while keeping writes project-memory-only 121ms
+   ✓ dreamAgentPlanner > throws when the agent fails 9ms
+   ✓ dreamAgentPlanner > throws when the agent terminates as cancelled 11ms
+ ✓ src/memory/manager.test.ts (53 tests) 692ms
+ ✓ src/memory/remember.test.ts (37 tests) 1198ms
+ ✓ src/memory/memory-scoped-agent-config.test.ts (28 tests) 686ms
+ ✓ src/memory/extract.test.ts (21 tests) 857ms
+ ✓ src/memory/memoryLifecycle.integration.test.ts (3 tests) 1074ms
+   ✓ managed auto-memory lifecycle integration > recalls a relevant topic beyond the general 200-document scan cap  446ms
+   ✓ managed auto-memory lifecycle integration > forgets a topic beyond the general 200-document scan cap  497ms
+ ✓ src/memory/secret-scanner.test.ts (29 tests) 391ms
+   ✓ scanForSecrets > handles many unmatched private-key markers without a match  360ms
+ ✓ src/memory/team-memory-git-status.test.ts (5 tests) 277ms
+ ✓ src/memory/search-memory.test.ts (49 tests) 364ms
+ ✓ src/memory/channel-memory-document.test.ts (24 tests) 54ms
+ ✓ src/memory/scan.test.ts (4 tests) 118ms
+ ✓ src/memory/recall-eval.test.ts (8 tests) 163ms
+ ✓ src/memory/writeContextFile.test.ts (17 tests) 124ms
+ ✓ src/memory/pending-skills.test.ts (11 tests) 139ms
+ ✓ src/memory/metadata-migration.test.ts (52 tests) 4809ms
+   ✓ memory metadata migration > treats a concurrent extraction update as a CAS conflict  305ms
+   ✓ memory metadata migration > ranks a just-committed file as newest in the next file vocabulary  1247ms
+   ✓ memory metadata migration > processes at most ten files per run and resumes from a fresh scan  632ms
+ ✓ src/memory/userMemory.test.ts (13 tests) 138ms
+ ✓ src/memory/indexer.test.ts (8 tests) 153ms
+ ✓ src/memory/tree.test.ts (19 tests) 76ms
+ ✓ src/memory/team-index.test.ts (10 tests) 73ms
+ ✓ src/memory/trusted-memory-filesystem.test.ts (6 tests) 78ms
+ ✓ src/memory/team-paths.test.ts (10 tests) 48ms
+ ✓ src/memory/writer-keyword-vocabulary.test.ts (6 tests) 40ms
+ ✓ src/memory/relevanceSelector.test.ts (13 tests) 49ms
+ ✓ src/memory/learn-skill-agent.test.ts (36 tests) 77ms
+ ✓ src/memory/recall.test.ts (51 tests) 58ms
+ ✓ src/memory/skillReviewNudge.integration.test.ts (18 tests) 118ms
+ ✓ src/memory/skillReviewAgentPlanner.test.ts (33 tests) 294ms
+ ✓ src/memory/prompt.test.ts (33 tests) 25ms
+ ✓ src/memory/dream.test.ts (3 tests) 47ms
+ ✓ src/memory/const.test.ts (5 tests) 13ms
+ ✓ src/memory/team-memory-secret-guard.test.ts (4 tests) 34ms
+ ✓ src/memory/entries.test.ts (1 test) 8ms
+ ✓ src/memory/refresh.test.ts (9 tests) 62ms
+ ✓ src/memory/extractionAgentPlanner.test.ts (20 tests) 54ms
+ ✓ src/memory/extractAgent.test.ts (1 test) 65ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 9 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/memory/dreamAgentPlanner.test.ts > dreamAgentPlanner > returns project-scoped session transcript directory
+AssertionError: expected '/root/.qwen/projects/-tmp-auto-memory…' to contain '/tmp/auto-memory-dream-agent-Ri7YKg/r…'
+
+Expected: [32m"/[7mtmp/[27mauto-memory-dream-agent-Ri7YKg[7m/runtime/projec[27mts"[39m
+Received: [31m"/[7mroot/.qwen/projects/-tmp-[27mauto-memory-dream-agent-Ri7YKg[7m-project/cha[27mts"[39m
+
+ ❯ src/memory/dreamAgentPlanner.test.ts:83:43
+     81|       path.join(new Storage(projectRoot).getProjectDir(), 'chats'),
+     82|     );
+     83|     expect(getTranscriptDir(projectRoot)).toContain(
+       |                                           ^
+     84|       path.join(runtimeDir, 'projects'),
+     85|     );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/9]⎯
+
+ FAIL  src/memory/recall-scan-latency.test.ts > auto-memory recall scan latency > publishes the fast result well inside the initial budget
+AssertionError: expected 83.07488300000023 to be less than 50
+ ❯ src/memory/recall-scan-latency.test.ts:172:41
+    170|     // table is what carries the detail.
+    171|     expect(smallest[0]).toBe(TOPIC_COUNTS[0]);
+    172|     expect(smallest[SHARED_CI ? 1 : 2]).toBeLessThan(FAST_RESULT_CEILI…
+       |                                         ^
+    173| 
+    174|     console.log(
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/9]⎯
+
+ FAIL  src/memory/store.test.ts > auto-memory storage scaffold > uses the runtime output directory for managed auto-memory
+AssertionError: expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-dVxMCv/runtime-outpu…' // Object.is equality
+
+Expected: [32m"/[7mtmp/auto-memory-dVxMCv/runtime-output[27m/projects/-tmp-auto-memory-dVxMCv-project/memory"[39m
+Received: [31m"/[7mroot/.qwen[27m/projects/-tmp-auto-memory-dVxMCv-project/memory"[39m
+
+ ❯ src/memory/store.test.ts:129:44
+    127|     clearAutoMemoryRootCache();
+    128| 
+    129|     expect(getAutoMemoryRoot(projectRoot)).toBe(
+       |                                            ^
+    130|       path.join(
+    131|         runtimeDir,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/9]⎯
+
+ FAIL  src/memory/store.test.ts > auto-memory storage scaffold > shares managed auto-memory across nested directories in the same git checkout by default
+AssertionError: expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-KKQ3Ko/runtime-outpu…' // Object.is equality
+
+Expected: [32m"/[7mtmp/auto-memory-KKQ3Ko/runtime-output[27m/projects/-tmp-auto-memory-KKQ3Ko-repo/memory"[39m
+Received: [31m"/[7mroot/.qwen[27m/projects/-tmp-auto-memory-KKQ3Ko-repo/memory"[39m
+
+ ❯ src/memory/store.test.ts:152:43
+    150|     await fs.mkdir(workspaceB, { recursive: true });
+    151| 
+    152|     expect(getAutoMemoryRoot(workspaceA)).toBe(
+       |                                           ^
+    153|       path.join(runtimeDir, 'projects', sanitizeCwd(repo), 'memory'),
+    154|     );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/9]⎯
+
+ FAIL  src/memory/store.test.ts > auto-memory storage scaffold > isolates managed auto-memory by exact workspace when workspace scope is enabled
+AssertionError: expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-WYBGOA/runtime-outpu…' // Object.is equality
+
+Expected: [32m"/[7mtmp/auto-memory-WYBGOA/runtime-output[27m/projects/-tmp-auto-memory-WYBGOA-repo-workspaces-agent/memory"[39m
+Received: [31m"/[7mroot/.qwen[27m/projects/-tmp-auto-memory-WYBGOA-repo-workspaces-agent/memory"[39m
+
+ ❯ src/memory/store.test.ts:173:43
+    171|     await fs.mkdir(workspaceB, { recursive: true });
+    172| 
+    173|     expect(getAutoMemoryRoot(workspaceA)).toBe(
+       |                                           ^
+    174|       path.join(runtimeDir, 'projects', sanitizeCwd(workspaceA), 'memo…
+    175|     );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/9]⎯
+
+ FAIL  src/memory/store.test.ts > auto-memory storage scaffold > normalizes the memory project scope value case-insensitively
+AssertionError: expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-uX8cqL/runtime-outpu…' // Object.is equality
+
+Expected: [32m"/[7mtmp/auto-memory-uX8cqL/runtime-output[27m/projects/-tmp-auto-memory-uX8cqL-repo-workspaces-agent/memory"[39m
+Received: [31m"/[7mroot/.qwen[27m/projects/-tmp-auto-memory-uX8cqL-repo-workspaces-agent/memory"[39m
+
+ ❯ src/memory/store.test.ts:192:43
+    190|     await fs.mkdir(workspaceA, { recursive: true });
+    191| 
+    192|     expect(getAutoMemoryRoot(workspaceA)).toBe(
+       |                                           ^
+    193|       path.join(runtimeDir, 'projects', sanitizeCwd(workspaceA), 'memo…
+    194|     );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/9]⎯
+
+ FAIL  src/memory/store.test.ts > auto-memory storage scaffold > falls back to git-root scope and warns once on an unrecognized scope value
+AssertionError: expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-muGj3K/runtime-outpu…' // Object.is equality
+
+Expected: [32m"/[7mtmp/auto-memory-muGj3K/runtime-output[27m/projects/-tmp-auto-memory-muGj3K-repo/memory"[39m
+Received: [31m"/[7mroot/.qwen[27m/projects/-tmp-auto-memory-muGj3K-repo/memory"[39m
+
+ ❯ src/memory/store.test.ts:210:45
+    208|       await fs.mkdir(workspaceA, { recursive: true });
+    209| 
+    210|       expect(getAutoMemoryRoot(workspaceA)).toBe(
+       |                                             ^
+    211|         path.join(runtimeDir, 'projects', sanitizeCwd(repo), 'memory'),
+    212|       );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/9]⎯
+
+ FAIL  src/memory/store.test.ts > auto-memory storage scaffold > gives a linked git worktree its own memory root, separate from the main checkout
+AssertionError: expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-yb86OW/runtime-outpu…' // Object.is equality
+
+Expected: [32m"/[7mtmp/auto-memory-yb86OW/runtime-output[27m/projects/-tmp-auto-memory-yb86OW-wt/memory"[39m
+Received: [31m"/[7mroot/.qwen[27m/projects/-tmp-auto-memory-yb86OW-wt/memory"[39m
+
+ ❯ src/memory/store.test.ts:246:41
+    244|     );
+    245| 
+    246|     expect(getAutoMemoryRoot(worktree)).toBe(
+       |                                         ^
+    247|       path.join(runtimeDir, 'projects', sanitizeCwd(worktree), 'memory…
+    248|     );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/9]⎯
+
+ FAIL  src/memory/store.test.ts > auto-memory storage scaffold > does not reuse cached roots across runtime output dirs
+AssertionError: expected '/root/.qwen/projects/-tmp-auto-memory…' to be '/tmp/auto-memory-Kd8gfA/runtime-a/pro…' // Object.is equality
+
+Expected: [32m"/[7mtmp/auto-memory-Kd8gfA/runtime-a[27m/projects/-tmp-auto-memory-Kd8gfA-project/memory"[39m
+Received: [31m"/[7mroot/.qwen[27m/projects/-tmp-auto-memory-Kd8gfA-project/memory"[39m
+
+ ❯ src/memory/store.test.ts:281:19
+    279|     );
+    280| 
+    281|     expect(rootA).toBe(
+       |                   ^
+    282|       path.join(
+    283|         runtimeA,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/9]⎯
+
+
+ Test Files  3 failed | 40 passed (43)
+      Tests  9 failed | 849 passed (858)
+   Start at  13:05:47
+   Duration  42.42s (transform 16.80s, setup 665ms, collect 130.94s, tests 27.11s, environment 20ms, prepare 9.31s)
+
+JUNIT report written to /root/git/qwen-code/.qwen/worktrees/pr-12893/packages/core/junit.xml
+EXIT=1
