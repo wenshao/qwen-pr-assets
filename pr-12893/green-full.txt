@@ -1,0 +1,14 @@
+
+ RUN  v3.2.7 /root/git/qwen-code/.qwen/worktrees/pr-12893/packages/core
+      Coverage enabled with v8
+
+ ✓ src/memory/search-memory.test.ts (49 tests) 301ms
+
+ Test Files  1 passed (1)
+      Tests  49 passed (49)
+   Start at  13:03:10
+   Duration  16.36s (transform 602ms, setup 44ms, collect 771ms, tests 301ms, environment 0ms, prepare 147ms)
+
+JUNIT report written to /root/git/qwen-code/.qwen/worktrees/pr-12893/packages/core/junit.xml
+ % Coverage report from v8
+EXIT=0
